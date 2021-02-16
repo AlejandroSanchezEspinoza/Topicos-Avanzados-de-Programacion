@@ -1,0 +1,155 @@
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+
+public class Calculadora extends JFrame implements ActionListener
+{
+   private JButton botonSuma, botonResta, botonMulti, botonDiv, botonLimpiar, botonSalir;
+   private JTextField numero1, numero2, campoResultado;
+   JLabel label1, label2;
+   
+   public void Controles()
+   {
+      Container contenedor = getContentPane();
+      contenedor.setLayout(new FlowLayout());
+      label1 = new JLabel("Numero 1");
+      contenedor.add(label1);
+      numero1 = new JTextField(10);
+      contenedor.add(numero1);
+      label2 = new JLabel("Numero 2");
+      contenedor.add(label2);
+      numero2 = new JTextField(10);
+      contenedor.add(numero2);
+      
+      botonSuma = new JButton("+");
+      contenedor.add(botonSuma);
+      botonSuma.addActionListener(this);
+      botonResta = new JButton("-");
+      contenedor.add(botonResta);
+      botonResta.addActionListener(this);
+      botonMulti = new JButton("x");
+      contenedor.add(botonMulti);
+      botonMulti.addActionListener(this);
+      botonDiv = new JButton("/");
+      contenedor.add(botonDiv);
+      botonDiv.addActionListener(this);
+      
+      campoResultado = new JTextField(10);
+      contenedor.add(campoResultado);
+      botonLimpiar = new JButton("Limpiar");
+      contenedor.add(botonLimpiar);
+      botonLimpiar.addActionListener(this);
+      botonSalir = new JButton("Salir");
+      contenedor.add(botonSalir);
+      botonSalir.addActionListener(this);  
+   }
+   
+   public Calculadora()
+   {
+      super("Calculadora");
+      Controles();
+      setSize(390,220);
+      setLocationRelativeTo(null);
+      setVisible(true);
+   }
+   
+   public void actionPerformed(ActionEvent e)
+   {
+     double valor1, valor2, resu;
+     String resultado;
+      if(e.getSource()==botonSuma)
+      {
+         if(numero1.getText().equals("") || numero2.getText().equals(""))
+         {
+            JOptionPane.showMessageDialog(null, "los datos no estan completos", "Error", JOptionPane.ERROR_MESSAGE);
+            
+         }
+         else
+         {
+            valor1=Double.parseDouble(numero1.getText());
+            valor2=Double.parseDouble(numero2.getText());
+            resu=valor1+valor2;
+            resultado=String.valueOf(resu);
+            campoResultado.setText(resultado);
+         }
+      }
+      if(e.getSource()==botonResta)
+      {
+         if(numero1.getText().equals("") || numero2.getText().equals(""))
+         {
+            JOptionPane.showMessageDialog(null, "los datos no estan completos", "Error", JOptionPane.ERROR_MESSAGE);
+            
+         }
+         else
+         {
+            valor1=Double.parseDouble(numero1.getText());
+            valor2=Double.parseDouble(numero2.getText());
+            resu=valor1-valor2;
+            resultado=String.valueOf(resu);
+            campoResultado.setText(resultado);
+         }
+      }
+      if(e.getSource()==botonMulti)
+      {
+         if(numero1.getText().equals("") || numero2.getText().equals(""))
+         {
+            JOptionPane.showMessageDialog(null, "los datos no estan completos", "Error", JOptionPane.ERROR_MESSAGE);
+            
+         }
+         else
+         {
+            valor1=Double.parseDouble(numero1.getText());
+            valor2=Double.parseDouble(numero2.getText());
+            resu=valor1*valor2;
+            resultado=String.valueOf(resu);
+            campoResultado.setText(resultado);
+         }
+      }
+      if(e.getSource()==botonDiv)
+      {
+         if(numero1.getText().equals("") || numero2.getText().equals(""))
+         {
+            JOptionPane.showMessageDialog(null, "los datos no estan completos", "Error", JOptionPane.ERROR_MESSAGE);
+            
+         }
+         else
+         {
+            valor1=Double.parseDouble(numero1.getText());
+            valor2=Double.parseDouble(numero2.getText());
+            try
+            {
+               resu=valor1/valor2;
+               resultado=String.valueOf(resu);
+               campoResultado.setText(resultado);
+            }
+            catch(ArithmeticException ex)
+            {
+               JOptionPane.showMessageDialog(null, "los datos no estan completos", "Error", JOptionPane.ERROR_MESSAGE);
+               
+            }
+         }
+        }
+         
+        if(e.getSource()==botonLimpiar)
+        {
+         numero1.setText("");
+         numero2.setText("");
+         campoResultado.setText("");
+        }
+        if(e.getSource()==botonSalir)
+        {
+         System.exit(0);
+        }
+ 
+   }
+   
+   public static void main(String [] args)
+   {
+      JFrame.setDefaultLookAndFeelDecorated(true);
+      Calculadora cal = new Calculadora();
+      cal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+   }
+} 
